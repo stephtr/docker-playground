@@ -61,6 +61,7 @@ RUN set -ex \
 FROM nginx:1.21.4
 COPY --from=builder /tmp/packages /tmp/packages
 COPY brotli.conf /etc/nginx/conf.d/brotli.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 RUN set -ex \
     && apt update \
     && . /tmp/packages/modules.env \
