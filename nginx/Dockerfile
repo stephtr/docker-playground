@@ -61,6 +61,7 @@ RUN set -ex \
 FROM nginx:1.21.4
 ENV ENABLED_MODULES=brotli
 COPY --from=builder /tmp/packages /tmp/packages
+COPY brotli.conf /etc/nginx/conf.d/brotli.conf
 RUN set -ex \
     && apt update \
     && . /tmp/packages/modules.env \
