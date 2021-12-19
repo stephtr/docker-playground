@@ -1,0 +1,56 @@
+name: Create and publish Docker images
+
+on: ["push"]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push-image:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.4.0
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: metaNginx
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            ghcr.io/stephtr/nginx
+
+      - name: Build and push nginx image
+        uses: docker/build-push-action@v2
+        with:
+          context: nginx
+          push: true
+          tags: ${{ steps.metaNginx.outputs.tags }}
+          labels: ${{ steps.metaNginx.outputs.labels }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: metaPhp
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            ghcr.io/stephtr/php
+
+      - name: Build and push php image
+        uses: docker/build-push-action@v2
+        with:
+          context: php
+          push: true
+          tags: ${{ steps.metaPhp.outputs.tags }}
+          labels: ${{ steps.metaPhp.outputs.labels }}
