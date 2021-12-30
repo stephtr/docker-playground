@@ -2,6 +2,8 @@ name: Create and publish php image
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'php/**'
 
