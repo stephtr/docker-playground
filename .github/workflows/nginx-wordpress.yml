@@ -1,0 +1,40 @@
+name: Create and publish nginx image
+
+on:
+  push:
+    paths:
+      - 'nginx-wordpress/**'
+
+jobs:
+  build-and-push-image:
+    name: Push nginx-wordpress image to Docker Hub
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.4.0
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            ghcr.io/stephtr/nginx-wordpress
+
+      - name: Build and push docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: nginx-wordpress
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
