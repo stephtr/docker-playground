@@ -1,4 +1,4 @@
-name: Create and publish nginx image
+name: Create and publish nginx-wordpress image
 
 on:
   push:
