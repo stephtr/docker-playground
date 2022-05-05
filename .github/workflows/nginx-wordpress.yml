@@ -32,7 +32,7 @@ jobs:
             ghcr.io/stephtr/nginx-wordpress
 
       - name: Build and push docker image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: nginx-wordpress
           push: true
