@@ -1,4 +1,4 @@
-FROM nginx:1.23.3 as builder
+FROM nginx:1.23.4 as builder
 
 ENV ENABLED_MODULES=brotli
 
@@ -58,7 +58,7 @@ RUN set -ex \
     done \
     && echo "BUILT_MODULES=\"$BUILT_MODULES\"" > /tmp/packages/modules.env
 
-FROM nginx:1.23.3
+FROM nginx:1.23.4
 COPY --from=builder /tmp/packages /tmp/packages
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY brotli.conf /etc/nginx/conf.d/brotli.conf
