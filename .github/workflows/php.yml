@@ -24,7 +24,7 @@ jobs:
         id: extract-version
         run: |
           # Extract version from the Dockerfile's FROM line
-          VERSION=$(grep -oP '(?<=^FROM ghcr.io/stephtr/php:)[0-9]+\.[0-9]+\.[0-9]+' php/Dockerfile | head -n 1)
+          VERSION=$(grep -oP '(?<=^FROM php:)[0-9]+\.[0-9]+\.[0-9]+' php/Dockerfile | head -n 1)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
       
       - name: Set up Docker Buildx
