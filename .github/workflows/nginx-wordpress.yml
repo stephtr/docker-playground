@@ -1,6 +1,7 @@
 name: Create and publish nginx-wordpress image
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'nginx-wordpress/**'
