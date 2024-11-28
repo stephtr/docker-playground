@@ -5,4 +5,5 @@ RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install gd \
     && a2enmod rewrite \
+    && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && rm -rf /var/lib/apt/lists/
