@@ -1,2 +1,2 @@
-FROM ghcr.io/stephtr/nginx:1.27.5
+FROM ghcr.io/stephtr/nginx:1.28.0
 COPY default.conf /etc/nginx/conf.d/default.conf
