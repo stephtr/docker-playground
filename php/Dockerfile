@@ -1,4 +1,4 @@
-FROM php:8.5.0-apache
+FROM php:8.5.1-apache
 RUN apt-get update && apt-get install -y zlib1g-dev libpng-dev libjpeg-dev
 RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-install mysqli \
