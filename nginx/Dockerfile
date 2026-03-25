@@ -1,6 +1,6 @@
 # based on https://github.com/nginxinc/docker-nginx/blob/master/modules/Dockerfile
 
-FROM nginx:1.29.6 AS builder
+FROM nginx:1.29.7 AS builder
 
 ENV ENABLED_MODULES=brotli
 
@@ -70,7 +70,7 @@ RUN apt-get update \
     done \
     && echo "BUILT_MODULES=\"$BUILT_MODULES\"" > /tmp/packages/modules.env
 
-FROM nginx:1.29.6
+FROM nginx:1.29.7
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY brotli.conf /etc/nginx/conf.d/brotli.conf
 COPY default.conf /etc/nginx/conf.d/default.conf
