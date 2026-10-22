@@ -44,6 +44,7 @@ jobs:
           images: ghcr.io/stephtr/php
           tags: |
             type=semver,pattern={{version}}-apache,value=${{ steps.extract-version.outputs.version }}-apache
+            8.4
 
       - name: Build and push docker image
         uses: docker/build-push-action@v7
